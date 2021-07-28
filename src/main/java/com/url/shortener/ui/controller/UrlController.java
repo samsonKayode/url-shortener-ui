@@ -1,5 +1,6 @@
 package com.url.shortener.ui.controller;
 
+import com.url.shortener.ui.model.ShortUrl;
 import com.url.shortener.ui.model.UrlDto;
 import com.url.shortener.ui.service.UrlService;
 import org.slf4j.Logger;
@@ -20,8 +21,6 @@ import javax.validation.Valid;
 @RequestMapping("/shortlink")
 public class UrlController {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     UrlService service;
 
@@ -29,8 +28,9 @@ public class UrlController {
 
     @GetMapping("/home")
     public String showHome(Model model) {
+        encodedURL="";
         model.addAttribute("encodedURL", encodedURL);
-        return "home/homepage";
+        return "pages/homepage";
     }
 
     @ModelAttribute("urlDto")
@@ -39,21 +39,16 @@ public class UrlController {
         return new UrlDto();
     }
 
-
     @PostMapping("/encode")
     public String encodeUrl(@Valid @ModelAttribute("urlDto") UrlDto urlDto, BindingResult theBind, RedirectAttributes redirectAttributes, Model model) {
-
         if (theBind.hasErrors()) {
-
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.urlDto", theBind);
             redirectAttributes.addFlashAttribute("urlDto", urlDto);
-
             return "redirect:/shortlink/home";
         }else{
             encodedURL = service.convertUrl(urlDto);
             model.addAttribute("encodedURL", encodedURL);
-            //redirectAttributes.addFlashAttribute("encodedURL", encodedURL);
-            return "/home/homepage";
+            return "/pages/homepage";
         }
     }
 }

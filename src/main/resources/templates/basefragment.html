@@ -74,7 +74,7 @@ Coded by www.creative-tim.com
                         </a>
                         <div class="dropdown-menu dropdown-menu-xl">
                             <div class="dropdown-menu-inner">
-                                <a href="https://demos.creative-tim.com/argon-design-system/docs/components/alerts.html" class="media d-flex align-items-center">
+                                <a th:href="@{/shortlink/decode}" class="media d-flex align-items-center">
                                     <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
                                         <i class="ni ni-ui-04"></i>
                                     </div>
@@ -105,9 +105,9 @@ Coded by www.creative-tim.com
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link" data-toggle="dropdown" role="button">
+                        <a href="http://localhost:7000/swagger-ui/" target="_blank" class="nav-link" data-toggle="tooltip" role="button">
                             <i class="ni ni-collection d-lg-none"></i>
-                            <span class="nav-link-inner--text">Api Decumentation</span>
+                            <span class="nav-link-inner--text">Api Documentation</span>
                         </a>
                     </li>
                 </ul>

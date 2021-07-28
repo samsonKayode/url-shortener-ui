@@ -1,0 +1,96 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="basefragment :: header"></div>
+</head>
+
+<body class="login-page">
+
+<!--NavBar Fragment-->
+<div th:replace="basefragment :: navBar"></div>
+
+<section class="section section-shaped section-lg">
+    <div class="shape shape-style-1 bg-gradient-default">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="row justify-content-start">
+        <div class="col-lg-5">
+            <div class="card bg-secondary shadow border-3">
+                <div class="card-header bg-green pb-1">
+                    <div class="text-muted text-center mb-3"><h3 class="text-white">Decode Your ShortLink</h3></div>
+                    <div class="btn-wrapper text-center">
+
+                    </div>
+                </div>
+                <div class="card-body px-lg-5 py-lg-5">
+                    <form th:action="@{/shortlink/decode}" th:object="${shortUrl}" method="POST">
+                        <div class="form-group mb-3">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span><i class="ni ni-world" aria-hidden="true"></i></span>
+                                </div>
+                                <label> <strong style="margin-left: 5px;">Enter the URL code: </strong>
+                                </label>
+                            </div>
+
+                            <div>
+                                <font color="red" size=2px> <span th:if="${#fields.hasErrors('shortUrl')}"
+                                                                  th:errors="*{shortUrl}"></span></font>
+                            </div>
+
+                            <div class="input-group input-group-alternative">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-check-bold"></i></span>
+                                </div>
+                                <input type="text" th:field="*{shortUrl}" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+                        <!--display shortened result if gotten...-->
+
+                        <div th:if="${longURL.length()>4}">
+                            <div class="form-group mb-3">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span><i class="fa fa-link" aria-hidden="true"></i></span>
+                                    </div>
+                                    <label> <strong style="margin-left: 5px;"> Original URL </strong> </label>
+                                </div>
+                                <div class="input-group input-group-alternative">
+
+                                    <div id="myDIV">
+                                    <p th:text="${longURL}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success my-4">Decode URL!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--footer-->
+<div th:replace="basefragment :: myFooter"></div>
+
+</body>
+
+</html>
