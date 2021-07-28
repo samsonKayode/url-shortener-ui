@@ -20,4 +20,5 @@ public class Url {
     private Date dateCreated;
 
     private String hashUrl;
+
 }

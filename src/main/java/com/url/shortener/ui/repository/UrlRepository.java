@@ -14,4 +14,6 @@ public interface UrlRepository {
     public Url getShortUrlStatistics(String shortUrl);
 
     public String decodeUrl(String hashUrl);
+
+    public Boolean verifyShortUrl(String shortUrl);
 }

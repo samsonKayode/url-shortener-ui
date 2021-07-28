@@ -33,4 +33,9 @@ public class UrlServiceImpl implements UrlService{
     public String decodeUrl(String hashUrl) {
         return repository.decodeUrl(hashUrl);
     }
+
+    @Override
+    public Boolean verifyShortUrl(String shortUrl) {
+        return repository.verifyShortUrl(shortUrl);
+    }
 }

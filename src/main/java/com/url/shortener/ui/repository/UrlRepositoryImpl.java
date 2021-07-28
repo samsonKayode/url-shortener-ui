@@ -40,7 +40,7 @@ public class UrlRepositoryImpl implements UrlRepository {
 
         RestTemplate restTemplate = new RestTemplate();
         Url url = restTemplate.getForObject(backendURL+"/statistic/"+shortUrl, Url.class);
-        return null;
+        return url;
     }
 
     @Override
@@ -49,15 +49,18 @@ public class UrlRepositoryImpl implements UrlRepository {
         try{
             RestTemplate restTemplate = new RestTemplate();
             String longUrl = restTemplate.getForObject(backendURL+"/decode/"+hashUrl, String.class);
-
-            if(longUrl==null){
-                longUrl = "You have provided an invalid code";
-            }
             return longUrl;
         }catch(Exception exception){
             logger.error(exception.getLocalizedMessage());
 
             return exception.getLocalizedMessage();
         }
+    }
+
+    @Override
+    public Boolean verifyShortUrl(String shortUrl) {
+        RestTemplate restTemplate = new RestTemplate();
+        Boolean status = restTemplate.getForObject(backendURL+"/verify/"+shortUrl, Boolean.class);
+        return status;
     }
 }

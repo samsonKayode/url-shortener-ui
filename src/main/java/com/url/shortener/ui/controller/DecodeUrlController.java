@@ -24,7 +24,7 @@ public class DecodeUrlController {
     private String longURL ="";
 
     @GetMapping("/decode")
-    public String showHome(Model model) {
+    public String showDecodePage(Model model) {
         longURL="";
         model.addAttribute("longURL", longURL);
         return "pages/decode";
@@ -43,9 +43,10 @@ public class DecodeUrlController {
             redirectAttributes.addFlashAttribute("shortUrl", shortUrl);
             return "redirect:/shortlink/decode";
         }else{
-            longURL = service.decodeUrl(shortUrl.getShortUrl());
-
-            if(longURL.contains("something went wrong")){
+            Boolean shortUrlExist = service.verifyShortUrl(shortUrl.getShortUrl());
+            if(shortUrlExist==true){
+                longURL = service.decodeUrl(shortUrl.getShortUrl());
+            }else{
                 longURL="No data found for code provided";
             }
             model.addAttribute("longURL", longURL);
