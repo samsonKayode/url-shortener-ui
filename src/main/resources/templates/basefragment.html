@@ -41,8 +41,8 @@ Coded by www.creative-tim.com
     <!-- Navbar -->
     <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light py-2">
         <div class="container">
-            <a class="navbar-brand mr-lg-5" th:href="@{/shortlink/home}">
-                <img src="/img/shortLink_LOGO.png">
+            <a class="navbar-brand mr-lg-4" th:href="@{/shortlink/home}">
+                <h3 class="text-left text-white thick">SHORTLINK</h3>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -52,7 +52,7 @@ Coded by www.creative-tim.com
                     <div class="row">
                         <div class="col-6 collapse-brand">
                             <a th:href="@{/shortlink/home}">
-                                <img src="/img/shortLink_LOGO.png">
+                                <h3 class="text-left text-white thick">SHORTLINK</h3>
                             </a>
                         </div>
                         <div class="col-6 collapse-close">
@@ -66,11 +66,24 @@ Coded by www.creative-tim.com
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown" role="button">
-                            <i class="ni ni-ui-04 d-lg-none"></i>
+                            <i class="ni ni-ui-04 d-lg-5"></i>
                             <span class="nav-link-inner--text">Available Services</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-xl">
                             <div class="dropdown-menu-inner">
+
+                                <!--Encode Url -->
+
+                                <a th:href="@{/shortlink/home}" class="media d-flex align-items-center">
+                                    <div class="icon icon-shape bg-gradient-success rounded-circle text-white">
+                                        <i class="ni ni-ui-04"></i>
+                                    </div>
+                                    <div class="media-body ml-3">
+                                        <h5 class="heading text-warning mb-md-1"><b>Shorten a URL</b></h5>
+                                        <p class="description d-none d-md-inline-block mb-0">Use this feature to shorten a url.</p>
+                                    </div>
+                                </a>
+
                                 <a th:href="@{/shortlink/decode}" class="media d-flex align-items-center">
                                     <div class="icon icon-shape bg-gradient-warning rounded-circle text-white">
                                         <i class="ni ni-ui-04"></i>
@@ -80,6 +93,7 @@ Coded by www.creative-tim.com
                                         <p class="description d-none d-md-inline-block mb-0">Decode a shortened URL to it's original form.</p>
                                     </div>
                                 </a>
+
                                 <a th:href="@{/shortlink/list}" class="media d-flex align-items-center">
                                     <div class="icon icon-shape bg-gradient-primary rounded-circle text-white">
                                         <i class="ni ni-spaceship"></i>
@@ -109,33 +123,16 @@ Coded by www.creative-tim.com
                     </li>
                 </ul>
                 <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="" target="_blank" data-toggle="tooltip" title="Like us on Facebook">
-                            <i class="fa fa-facebook-square"></i>
-                            <span class="nav-link-inner--text d-lg-none">Facebook</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="" target="_blank" data-toggle="tooltip" title="Follow us on Instagram">
-                            <i class="fa fa-instagram"></i>
-                            <span class="nav-link-inner--text d-lg-none">Instagram</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="" target="_blank" data-toggle="tooltip" title="Follow us on Twitter">
-                            <i class="fa fa-twitter-square"></i>
-                            <span class="nav-link-inner--text d-lg-none">Twitter</span>
-                        </a>
-                    </li>
+
 
                     <li class="nav-item">
-                        <a class="btn btn-neutral" href="https://www.creative-tim.com/builder/argon" target="_blank">
+                        <a class="btn btn-neutral" href="https://github.com/samsonKayode/url-shortener-ui/archive/refs/heads/master.zip" target="_blank">
                             <i class="fa fa-download"></i>
                             <span class="nav-link-inner--text">Get Project</span>
                         </a>
                     </li>
                     <li class="nav-item d-none d-lg-block">
-                        <a href="https://www.creative-tim.com/product/argon-design-system-pro?ref=ads-upgrade-pro" target="_blank" class="btn btn-neutral btn-icon">
+                        <a href="https://github.com/samsonKayode" target="_blank" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon">
                 <i class="fa fa-github"></i>
               </span>

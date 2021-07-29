@@ -252,6 +252,10 @@ table {
   font-size:13px;
 }
 
+h3.thick{
+  font-weight: 900;
+}
+
 caption {
   padding-top: 1rem;
   padding-bottom: 1rem;

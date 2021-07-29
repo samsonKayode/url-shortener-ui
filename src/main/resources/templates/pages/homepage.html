@@ -50,6 +50,7 @@
                             <div>
                                 <font color="red" size=2px> <span th:if="${#fields.hasErrors('longUrl')}"
                                                                   th:errors="*{longUrl}"></span></font>
+
                             </div>
 
                             <div class="input-group input-group-alternative">
@@ -58,6 +59,9 @@
                                 </div>
                                 <input type="text" th:field="*{longUrl}" class="form-control" placeholder="">
                             </div>
+                        </div>
+                        <div th:if="${urlStatus==false}" class="text-center">
+                            <font color="red" size=2px>[[${urlError}]]</font>
                         </div>
 
                         <!--display shortened result if gotten...-->
