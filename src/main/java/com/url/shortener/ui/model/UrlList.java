@@ -6,24 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Url {
+public class UrlList {
 
-    @JsonProperty("id")
-    private int id;
-
-    @JsonProperty("longUrl")
-    private String longUrl;
-
-    @JsonProperty("dateCreated")
-    private Date dateCreated;
-
-    @JsonProperty("hashUrl")
-    private String hashUrl;
-
+    @JsonProperty(value = "urlList")
+    private List<Url> urlList;
 }

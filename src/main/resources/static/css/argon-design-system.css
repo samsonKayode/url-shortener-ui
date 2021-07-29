@@ -248,6 +248,8 @@ svg {
 
 table {
   border-collapse: collapse;
+  table-layout: fixed;
+  font-size:13px;
 }
 
 caption {

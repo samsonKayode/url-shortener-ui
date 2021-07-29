@@ -1,13 +1,15 @@
 package com.url.shortener.ui.repository;
 
-import com.url.shortener.ui.model.Url;
-import com.url.shortener.ui.model.UrlDto;
+import com.url.shortener.ui.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -31,7 +33,8 @@ public class UrlRepositoryImpl implements UrlRepository {
     public List<Url> getAllUrlList() {
 
         RestTemplate restTemplate = new RestTemplate();
-        List<Url> urlList = (List<Url>) restTemplate.getForObject(backendURL+"/list", Url.class);
+        List<Url> urlList = restTemplate.getForObject(backendURL+"/list", ArrayList.class);
+
         return urlList;
     }
 
@@ -62,5 +65,14 @@ public class UrlRepositoryImpl implements UrlRepository {
         RestTemplate restTemplate = new RestTemplate();
         Boolean status = restTemplate.getForObject(backendURL+"/verify/"+shortUrl, Boolean.class);
         return status;
+    }
+
+    @Override
+    public Page<PageUrl> findAll(int pageNo, String sortField, String sortDir) {
+
+        String sortingRef="?sortField="+sortField+"&sortDir="+sortDir;
+        RestTemplate restTemplate = new RestTemplate();
+        PageHelper page = restTemplate.getForObject(backendURL+"/list/"+pageNo+sortingRef, PageHelper.class);
+        return page;
     }
 }

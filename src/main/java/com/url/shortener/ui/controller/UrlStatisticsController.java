@@ -24,20 +24,16 @@ public class UrlStatisticsController {
 
     @Autowired
     UrlService service;
-
-     Url url=new Url();
-
-    private String noDataFound="";
-
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Url url = new Url();
+    private String noDataFound = "";
     @Value("${backend_url}")
     private String backendURL;
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @GetMapping("/stats")
     public String showStatsPage(Model model) {
-        url=new Url();
-        noDataFound ="";
+        url = new Url();
+        noDataFound = "";
         model.addAttribute("url", url);
         model.addAttribute("noDataFound", noDataFound);
         return "pages/stats";
@@ -51,19 +47,19 @@ public class UrlStatisticsController {
     }
 
     @PostMapping("/stats")
-    public String urlStats(@Valid @ModelAttribute("shortUrl") ShortUrl shortUrl, BindingResult theBind, RedirectAttributes redirectAttributes, Model model){
+    public String urlStats(@Valid @ModelAttribute("shortUrl") ShortUrl shortUrl, BindingResult theBind, RedirectAttributes redirectAttributes, Model model) {
         if (theBind.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.shortUrl", theBind);
             redirectAttributes.addFlashAttribute("shortUrl", shortUrl);
             return "redirect:/shortlink/stats";
-        }else{
+        } else {
             Boolean shortUrlExist = service.verifyShortUrl(shortUrl.getShortUrl());
-            if(shortUrlExist==true){
+            if (shortUrlExist == true) {
                 url = service.getShortUrlStatistics(shortUrl.getShortUrl());
-                url.setHashUrl(backendURL+"/"+url.getHashUrl());
-                noDataFound="found";
-            }else{
-                noDataFound="No data found for code provided";
+                url.setHashUrl(backendURL + "/" + url.getHashUrl());
+                noDataFound = "found";
+            } else {
+                noDataFound = "No data found for code provided";
             }
             model.addAttribute("noDataFound", noDataFound);
             model.addAttribute("url", url);

@@ -1,9 +1,13 @@
 package com.url.shortener.ui.service;
 
+import com.url.shortener.ui.model.PageUrl;
 import com.url.shortener.ui.model.Url;
 import com.url.shortener.ui.model.UrlDto;
+import com.url.shortener.ui.model.UrlList;
 import com.url.shortener.ui.repository.UrlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +41,10 @@ public class UrlServiceImpl implements UrlService{
     @Override
     public Boolean verifyShortUrl(String shortUrl) {
         return repository.verifyShortUrl(shortUrl);
+    }
+
+    @Override
+    public Page<PageUrl> findAll(int pageNo, String sortField, String sortDir) {
+        return repository.findAll(pageNo, sortField, sortDir);
     }
 }
