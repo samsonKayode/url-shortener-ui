@@ -68,11 +68,12 @@ public class UrlRepositoryImpl implements UrlRepository {
     }
 
     @Override
-    public Page<PageUrl> findAll(int pageNo, String sortField, String sortDir) {
+    public Page<PageUrl> findAll(int pageNo, String sortField, String sortDir, String longUrl) {
 
-        String sortingRef="?sortField="+sortField+"&sortDir="+sortDir;
+        String sortingRef="?sortField="+sortField+"&sortDir="+sortDir+"&longUrl="+longUrl;
         RestTemplate restTemplate = new RestTemplate();
         PageHelper page = restTemplate.getForObject(backendURL+"/list/"+pageNo+sortingRef, PageHelper.class);
         return page;
     }
+
 }

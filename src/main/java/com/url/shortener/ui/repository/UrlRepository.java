@@ -1,6 +1,7 @@
 package com.url.shortener.ui.repository;
 
 import com.url.shortener.ui.model.PageUrl;
+import com.url.shortener.ui.model.SearchDto;
 import com.url.shortener.ui.model.Url;
 import com.url.shortener.ui.model.UrlDto;
 import org.springframework.data.domain.Page;
@@ -20,5 +21,6 @@ public interface UrlRepository {
 
     public Boolean verifyShortUrl(String shortUrl);
 
-    public Page<PageUrl> findAll(int PageNo, String sortField, String sortDir);
+    public Page<PageUrl> findAll(int PageNo, String sortField, String sortDir, String longUrl);
+
 }

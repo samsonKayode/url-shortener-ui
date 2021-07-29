@@ -41,21 +41,47 @@
                 </div>
                 <div class="card-body px-lg-5 py-lg-5">
 
+                    <form th:action="@{/shortlink/find}" th:object="${searchDto}" method="GET">
+                        <div class="row col-md-11 justify-content-end">
+                            <div>
+                                <font color="red" size=2px> <span th:if="${#fields.hasErrors('longUrl')}"
+                                                                  th:errors="*{longUrl}"></span></font>
+                            </div>
+                        </div>
+                    <div class="row justify-content-end">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="input-group input-group-alternative mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-zoom-split-in"></i></span>
+                                    </div>
+                                    <input th:field="*{longUrl}" class="form-control form-control-alternative" placeholder="Search Long URLs" type="text">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary btn-round">Search</button>
+                        </div>
+                    </div>
+                    </form>
+
                     <table class="table">
                         <thead>
                         <tr>
                             <th class="text-center" style="width:5%">
-                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=id&sortDir=' +  ${reverseSortDir}}">
+                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=id&sortDir=' +  ${reverseSortDir} +'&longUrl=' + ${longUrl}}">
                                     # </a></th>
                             <th style="width:30%">
-                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=longUrl&sortDir=' +  ${reverseSortDir}}">
-                                    Long URL <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=longUrl&sortDir=' +  ${reverseSortDir} +'&longUrl=' + ${longUrl}}">
+                                    Long URL <i class="fa fa-sort" aria-hidden="true"></i></a></th>
                             <th style="width:20%">
-                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=dateCreated&sortDir=' +  ${reverseSortDir}}">Date
-                                    Created <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=dateCreated&sortDir=' +  ${reverseSortDir} +'&longUrl=' + ${longUrl}}">Date
+                                    Created <i class="fa fa-sort" aria-hidden="true"></i></a></th>
                             <th style="width:25%">
-                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=hashUrl&sortDir=' +  ${reverseSortDir}}">Short
-                                    URL <i class="fa fa-sort" aria-hidden="true"></i></th>
+                                <a th:href="@{'/shortlink/url-list/' + ${currentPage} +'?sortField=hashUrl&sortDir=' +  ${reverseSortDir} +'&longUrl=' + ${longUrl}}">Short
+                                    URL <i class="fa fa-sort" aria-hidden="true"></i></a></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -63,7 +89,7 @@
                             <td th:text="${lists.id}"/>
                             <td th:text="${lists.longUrl}"/>
                             <td th:text="${lists.dateCreated}"/>
-                            <td><span th:text="${backendURL}"/> <span th:text="${lists.hashUrl}"/></td>
+                            <td><span th:text="${backendURL}"/><span th:text="${lists.hashUrl}"/></td>
                         </tr>
                         </tbody>
                     </table>
@@ -81,7 +107,7 @@
                                         <!-- Previous Button-->
                                         <li class="page-item">
                                             <a th:if="${currentPage > 1 }"
-                                               th:href="@{'/shortlink/url-list/' + ${currentPage-1} + '?sortField=' + ${sortField} + '&sortDir='+ ${sortDir}}"
+                                               th:href="@{'/shortlink/url-list/' + ${currentPage-1} + '?sortField=' + ${sortField} + '&sortDir='+ ${sortDir} + '&longUrl=' + ${longUrl}}"
                                                class="page-link"
                                                tabindex="-1">
                                                 <i class="fa fa-angle-left"></i>
@@ -94,21 +120,18 @@
                                         <div th:each="i: ${#numbers.sequence(1, totalPages)}">
                                             <div th:if="${currentPage != i}">
                                                 <li class="page-item"><a
-                                                        th:href="@{'/shortlink/url-list/' + ${i} + '?sortField=' + ${sortField} + '&sortDir='+ ${sortDir}}"
+                                                        th:href="@{'/shortlink/url-list/' + ${i} + '?sortField=' + ${sortField} + '&sortDir='+ ${sortDir} +'&longUrl=' + ${longUrl}}"
                                                         class="page-link">[[${i}]]</a></li>
                                             </div>
-
                                             <div th:unless="${currentPage != i}">
-
                                                 <li class="page-item active"><a class="page-link">[[${i}]]</a></li>
-
                                             </div>
                                         </div>
 
                                         <!-- Last Button -->
                                         <li class="page-item">
                                             <a th:if="${currentPage < totalPages}"
-                                               th:href="@{'/shortlink/url-list/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir='+ ${sortDir}}"
+                                               th:href="@{'/shortlink/url-list/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir='+ ${sortDir} +'&longUrl=' + ${longUrl}}"
                                                class="page-link"
                                                tabindex="-1">
                                                 <i class="fa fa-angle-double-right"></i>

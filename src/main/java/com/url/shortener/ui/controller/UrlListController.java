@@ -1,6 +1,7 @@
 package com.url.shortener.ui.controller;
 
 import com.url.shortener.ui.model.PageUrl;
+import com.url.shortener.ui.model.SearchDto;
 import com.url.shortener.ui.model.Url;
 import com.url.shortener.ui.service.UrlService;
 import org.slf4j.Logger;
@@ -10,11 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -29,41 +28,50 @@ public class UrlListController {
     @Value("${backend_url}")
     private String backendURL;
 
-    private List<Url> urlList=null;
+    private List<Url> urlList = null;
 
+    String longUrl="";
 
+    //Start of search
 
-    /*
-    @GetMapping("/list")
-    public String urlList(Model model){
-        urlList = service.getAllUrlList();
-        model.addAttribute("urlList", urlList);
-        model.addAttribute("backendURL", backendURL+"/");
-        return "pages/list";
+    //SearchDto searchDto = new SearchDto();
+
+    @ModelAttribute("searchDto")
+    public SearchDto shortUrl(Model model) {
+        //model.addAttribute("longURL", longURL);
+        return new SearchDto();
     }
-    */
-    @GetMapping("/list")
-    public String urlList(Model model){
 
-        return paginatedList(1, "id", "asc", model);
+    @GetMapping("/find")
+    public String searchLongUrl(@Valid @ModelAttribute("searchDto") SearchDto searchDto, Model model) {
+
+        return paginatedList(1, "id", "asc", searchDto.getLongUrl(), model);
+    }
+
+    //End of search..
+
+    @GetMapping("/list")
+    public String urlList(Model model) {
+        return paginatedList(1, "id", "asc", longUrl, model);
     }
 
 
     @GetMapping("/url-list/{pageNo}")
     public String paginatedList(@PathVariable int pageNo, @RequestParam("sortField") String sortField,
-                               @RequestParam("sortDir") String sortDir, Model model){
+                                @RequestParam("sortDir") String sortDir, @RequestParam("longUrl") String longUrl, Model model) {
 
-        Page<PageUrl> page = service.findAll(pageNo, sortField, sortDir);
+        Page<PageUrl> page = service.findAll(pageNo, sortField, sortDir, longUrl);
         List<PageUrl> urlList = page.getContent();
 
+        model.addAttribute("longUrl", longUrl);
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("urlList", urlList);
-        model.addAttribute("backendURL", backendURL+"/");
+        model.addAttribute("backendURL", backendURL + "/");
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", sortDir.equals("asc")? "desc" : "asc");
+        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         return "pages/list";
     }
