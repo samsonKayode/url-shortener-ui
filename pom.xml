@@ -64,6 +64,7 @@
     </dependencies>
 
     <build>
+        <finalName>url-shortener-frontend</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
