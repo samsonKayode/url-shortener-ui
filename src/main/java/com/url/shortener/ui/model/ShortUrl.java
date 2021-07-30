@@ -15,6 +15,6 @@ import javax.validation.constraints.Size;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ShortUrl {
 
-    @Size(max = 8, min=5, message = "the shortened code should not be less than 5 and more than 8 digits")
+    @Size(min=2, message = "the shortened code should not be less than 2")
     private String shortUrl;
 }

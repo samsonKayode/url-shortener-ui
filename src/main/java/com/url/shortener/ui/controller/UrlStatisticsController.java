@@ -63,7 +63,7 @@ public class UrlStatisticsController {
             }
             model.addAttribute("noDataFound", noDataFound);
             model.addAttribute("url", url);
-            return "/pages/stats";
+            return "pages/stats";
         }
     }
 }

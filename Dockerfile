@@ -3,9 +3,8 @@ FROM maven:3.8.1-jdk-8-slim AS build
 RUN mkdir -p /workspace
 WORKDIR /workspace
 COPY pom.xml /workspace
-RUN mvn dependency:go-offline
 COPY src /workspace/src
-RUN mvn package
+RUN mvn -f pom.xml clean package
 
 ##STAGE 2: RUN IT!!!##
 FROM openjdk:8-jdk-alpine

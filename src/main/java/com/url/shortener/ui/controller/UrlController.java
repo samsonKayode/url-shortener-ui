@@ -57,7 +57,7 @@ public class UrlController {
         }else{
             encodedURL = service.convertUrl(urlDto);
             model.addAttribute("encodedURL", encodedURL);
-            return "/pages/homepage";
+            return "pages/homepage";
         }
     }
 }

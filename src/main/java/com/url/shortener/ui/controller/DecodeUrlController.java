@@ -50,7 +50,7 @@ public class DecodeUrlController {
                 longURL="No data found for code provided";
             }
             model.addAttribute("longURL", longURL);
-            return "/pages/decode";
+            return "pages/decode";
         }
     }
 }
